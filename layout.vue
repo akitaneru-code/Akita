@@ -12,7 +12,7 @@
                         <nuxt-link class="nav-link" to="/RecentDiscuss"><span class="fa fa-comments"></span><span class="hide-title">최근 토론</span></nuxt-link>
                     </li>
                     <li class="nav-item">
-                        <nuxt-link class="nav-link" to="/random"><span class="fa fa-random"></span><span class="hide-title">임의 문서</span></nuxt-link>
+                        <nuxt-link class="nav-link" to="/random"><span class="fa fa-random"></span><span class="hide-title">임의의 문서로</span></nuxt-link>
                     </li>
                     <li class="nav-item">
                         <dropdown>
@@ -22,9 +22,9 @@
                                 </a>
                             </template>
                             <div class="dropdown-menu" role="menu">
-                                <nuxt-link to="/Upload" class="dropdown-item">파일 올리기</nuxt-link>
+                                <nuxt-link to="/Upload" class="dropdown-item">올리적재</nuxt-link>
                                 <div class="dropdown-divider"></div>
-                                <nuxt-link to="/NeededPages" class="dropdown-item">작성이 필요한 문서</nuxt-link>
+                                <nuxt-link to="/NeededPages" class="dropdown-item">필요한 문서</nuxt-link>
                                 <nuxt-link to="/OrphanedPages" class="dropdown-item">고립된 문서</nuxt-link>
                                 <nuxt-link to="/OrphanedCategories" class="dropdown-item">고립된 분류</nuxt-link>
                                 <nuxt-link to="/UncategorizedPages" class="dropdown-item">분류가 되지 않은 문서</nuxt-link>
@@ -32,7 +32,7 @@
                                 <nuxt-link to="/ShortestPages" class="dropdown-item">내용이 짧은 문서</nuxt-link>
                                 <nuxt-link to="/LongestPages" class="dropdown-item">내용이 긴 문서</nuxt-link>
                                 <nuxt-link to="/BlockHistory" class="dropdown-item">차단 내역</nuxt-link>
-                                <nuxt-link to="/RandomPage" class="dropdown-item">RandomPage</nuxt-link>
+                                <nuxt-link to="/RandomPage" class="dropdown-item">임의의 문서로</nuxt-link>
                                 <nuxt-link to="/License" class="dropdown-item">라이선스</nuxt-link>
                                 <template v-if="$store.state.session.menus.length">
                                     <div class="dropdown-divider"></div>
@@ -58,9 +58,9 @@
                                 <b>{{ $store.state.session.account.name }}</b><br>Please login!
                             </div>
                             <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item" @click.prevent="openSettingModal">설정</a>
-                            <a v-if="$store.state.currentTheme === 'light'" href="#" class="dropdown-item" @click.prevent="$store.commit('localConfigSetValue', {key: 'wiki.theme', value: 'dark'})">다크 테마로</a>
-                            <a v-if="$store.state.currentTheme === 'dark'" href="#" class="dropdown-item" @click.prevent="$store.commit('localConfigSetValue', {key: 'wiki.theme', value: 'light'})">라이트 테마로</a>
+                            <a href="#" class="dropdown-item" @click.prevent="openSettingModal">기본 설정</a>
+                            <a v-if="$store.state.currentTheme === 'light'" href="#" class="dropdown-item" @click.prevent="$store.commit('localConfigSetValue', {key: 'wiki.theme', value: 'dark'})">어두운 테마로</a>
+                            <a v-if="$store.state.currentTheme === 'dark'" href="#" class="dropdown-item" @click.prevent="$store.commit('localConfigSetValue', {key: 'wiki.theme', value: 'light'})">밝은 테마로</a>
                             <div class="dropdown-divider"></div>
                             <template v-if="$store.state.session.account.type === 1">
                                 <nuxt-link to="/member/mypage" class="dropdown-item">내 정보</nuxt-link>
@@ -71,7 +71,7 @@
                             <template v-if="$store.state.session.account.uuid">
                                 <nuxt-link class="dropdown-item" :to="contribution_link($store.state.session.account.uuid)">내 문서 기여 목록</nuxt-link>
                                 <nuxt-link class="dropdown-item" :to="contribution_link_discuss($store.state.session.account.uuid)">내 토론 기여 목록</nuxt-link>
-                                <nuxt-link class="dropdown-item" :to="contribution_link_edit_request($store.state.session.account.uuid)">내 편집 요청 목록</nuxt-link>
+                                <nuxt-link class="dropdown-item" :to="contribution_link_edit_request($store.state.session.account.uuid)">내 편집요청 목록</nuxt-link>
                                 <div class="dropdown-divider"></div>
                             </template>
                             <nuxt-link v-if="$store.state.session.account.type === 1" :to="{path:'/member/logout',query:{redirect:$route.fullPath}}" class="dropdown-item">로그아웃</nuxt-link>
@@ -109,7 +109,7 @@
                     <div class="title">
                         <h1 v-if="$store.state.page.data.document && $store.state.page.viewName !== 'error'">
                             <nuxt-link :to="doc_action_link($store.state.page.data.document, 'w')"><span v-if="$store.state.page.data.document.forceShowNamespace !== false" class="namespace">{{$store.state.page.data.document.namespace}}:</span>{{$store.state.page.data.document.title}}</nuxt-link>
-                            <small v-if="$store.state.page.viewName === 'edit_edit_request' || $store.state.page.viewName === 'edit_request'">(편집 요청)</small>
+                            <small v-if="$store.state.page.viewName === 'edit_edit_request' || $store.state.page.viewName === 'edit_request'">(편집요청)</small>
                             <small v-else-if="$store.state.page.viewName === 'edit' && $store.state.page.data.body.section">(r{{$store.state.page.data.body.baserev}} 문단 편집)</small>
                             <small v-else-if="$store.state.page.viewName === 'edit' && $store.state.page.data.body.baserev === '0'">(새 문서 생성)</small>
                             <small v-else-if="$store.state.page.viewName === 'edit'">(r{{$store.state.page.data.body.baserev}} 편집)</small>
